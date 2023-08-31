@@ -13,44 +13,60 @@ function getComputerChoice (arr){
     return getRandomChoiceFromArr(arr)
 }
 
-
+let playerCount = 0;
+let cpuCount = 0;
 function playRound(playerSelection, computerSelection){
-
-    if(playerSelection == computerSelection){
-            return "It's a tie"
+        if(playerSelection == computerSelection){
+                return "It's a tie"
+        }
+       
+        if(playerSelection == "paper" && computerSelection == "rock" || 
+        (playerSelection == "rock" && computerSelection == "scissors") ||
+        (playerSelection == "scissors" && computerSelection == "rock")
+        ){ 
+            playerCount++
+            return`You Win! ${playerSelection} beats ${computerSelection} player: ${playerCount} cpu: ${cpuCount}`    
+         }else{
+            cpuCount++
+            return `You Lose! ${computerSelection}  beats ${playerSelection} cpu: ${cpuCount} player: ${playerCount}`
+         }
     }
-     if(playerSelection == "rock" && computerSelection == "paper" ){    
-           return "You Lose! Paper beats Rock "
-        }else if(playerSelection == "rock" && computerSelection == "scissors"){
-           return "You Win! Rock beats Scissors "
-        }
-
-    if(playerSelection == "paper" && computerSelection == "rock"){    
-            return  "You Win! Paper beats Rock "
-        }else if(computerSelection == "scissors" && playerSelection == "paper" ){
-            return"You Lose! Scissors beats Paper "
-        }
-
-    if(playerSelection == "scissors" && computerSelection == "rock"){    
-            return "You Win! Rock beats Scissors "
-    }else if(playerSelection == "scissors" && computerSelection == "paper"){
-            return"You Lose! Scissors beats Paper "
-        }
-    }
-
 
 function game(){
     let playerSelection = prompt("choose rock, paper or scissors.")
-    if(playerSelection.includes(options)){
-        let count = 0;
-        while(count < 6){
+        if(options.includes(playerSelection)){
             computerSelection = getComputerChoice(options)
-            console.log(playRound(playerSelection, computerSelection));
-            count++
+            playRound(playerSelection, computerSelection)
+            
         }
+ }
 
+
+ 
+
+
+
+
+ let count = 1;
+ while(count < 6){
+     count++
+     game();
+     if(count === 6){
+        if(playerCount > cpuCount){
+            console.log('you win')
+            console.log('player count:' + playerCount)
+            console.log('cpu count:' + cpuCount)
+
+        }else if(cpuCount > playerCount){ 
+            console.log('you lose')
+            console.log('player count:' + playerCount)
+            console.log('cpu count:' + cpuCount)
+        }
     }
-}
+    
+ }
+
+
 
   
     
